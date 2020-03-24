@@ -1,0 +1,28 @@
+version: "3.4"
+
+services:
+  frontend-proxy:
+    build:
+      context: .
+      dockerfile: nginx.Dockerfile
+    image: ise_nginx:dev
+    container_name: proxy_frontend
+    networks:
+      - default
+      - frontend
+      - backend
+      - monitoring
+    ports:
+      - "80:80"
+
+
+networks:
+  frontend:
+    external:
+      name: isefrontend_default
+  backend:
+    external:
+      name: isebackend_default
+  monitoring:
+    external:
+      name: isemonitoring_default

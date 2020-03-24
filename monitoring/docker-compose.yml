@@ -1,0 +1,26 @@
+version: "3.4"
+
+services:
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: test@test.de
+      PGADMIN_DEFAULT_PASSWORD: test
+    expose:
+      - "80"
+    restart: always
+    networks:
+      - default
+      - isebackend_default
+    volumes:
+      - ./pgadmin4/servers.json:/pgadmin4/servers.json
+      - pgadmin:/var/lib/pgadmin
+
+volumes:
+  pgadmin:
+
+networks: 
+  isebackend_default:
+    external: 
+      name: isebackend_default
